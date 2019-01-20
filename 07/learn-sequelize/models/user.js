@@ -1,29 +1,38 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('user', {
-      U_ID: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
-        unique: true,
+
+    const users = sequelize.define('USERS', {
+      name : {
+        type : DataTypes.STRING(20),
+        allowNull : false,
+        unique : true,
       },
-      U_NAME: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
+      age : {
+        type : DataTypes.INTEGER.UNSIGNED,
+        allowNull : false,
       },
-      U_PK: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+      married : {
+        type : DataTypes.BOOLEAN,
+        allowNull : false,
       },
-      U_COMPANY: {
-        type: DataTypes.STRING(255),
-        allowNull: true,
+      comment : {
+        type : DataTypes.TEXT,
+        allowNull : true,
       },
-      U_REGISTER_DATE: {
-        type: DataTypes.DATE,
-        allowNull: true,
-        defaultValue: sequelize.literal('now()'),
+      created_at : {
+        type : DataTypes.DATE,
+        allowNull : false,
+        defaultValue : sequelize.literal('now()'),
       },
     }
+
     , {
-      timestamps: false,
+      //classMethods:{},
+      freezeTableName : true, //true => 첫번째 인자의 값으로 테이블명 설정 => 'USERS'
+      timestamps      : false, //true => createdAt, updatedAt 칼럼을 자동으로 만들어줌
+      //paranoid        : true, // true => deletedAt 칼럼을 자동으로 만들어줌
+      //underscored     : true, // true => 칼럼명 형식을 xxx_xxx 형식으로 해줌
+      //tableName     : 'USERS', // tableName속성의 값의 이름으로 테이블명이 만들어짐
     });
+
+    return users;
   };
