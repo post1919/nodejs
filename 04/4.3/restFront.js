@@ -1,7 +1,7 @@
 //로딩 시 사용자가 가져오는 함수
 function getUser(){
     var xhr = new XMLHttpRequest();
-    
+     
     xhr.onload = function(){
         if( xhr.status === 200 ){
             var users = JSON.parse(xhr.responseText);
@@ -13,6 +13,7 @@ function getUser(){
                 var span    = document.createElement('span');
                 span.textContent = users[key];
 
+                //수정버튼 생성[s]
                 var edit = document.createElement('button');
                 edit.textContent = '수정';
                 edit.addEventListener('click', function(){
@@ -35,11 +36,18 @@ function getUser(){
                     xhr.setRequestHeader('Content-Type', 'application/json');
                     xhr.send(JSON.stringify({name:name}));
                 });
+                //수정버튼 생성[e]
 
+                //삭제버튼 생성[s]
                 var remove = document.createElement('button');
                 remove.textContent = '삭제';
 
                 remove.addEventListener('click', function(){
+
+                    if( !confirm('삭제하시겠습니까?') ){
+                        return false;
+                    }
+
                     var xhr = new XMLHttpRequest();
                     xhr.onload = function(){
                         if(xhr.status === 200){
@@ -52,6 +60,7 @@ function getUser(){
                     xhr.open('DELETE', '/users/' + key);
                     xhr.send();
                 });
+                //삭제버튼 생성[s]
 
                 userDiv.appendChild(span);
                 userDiv.appendChild(edit);

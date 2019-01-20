@@ -5,7 +5,7 @@ const data = [];
 
 readStream.on('data', (chunk)=>{
     data.push(chunk);
-    console.log('data : ', chunk, chunk.length);
+    console.log('data : ', chunk, chunk.length, chunk.toString());
 });
 
 readStream.on('end', ()=>{

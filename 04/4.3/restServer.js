@@ -5,8 +5,8 @@ const users = {};
 
 http.createServer((req, res)=>{
 
-    console.log('METHOD ===> ', req.method);
-    console.log('URL ===> ', req.url, '\n');
+    /* console.log('METHOD ===> ', req.method);
+    console.log('URL ===> ', req.url, '\n'); */
 
     if(req.method === 'GET'){
         if(req.url === '/'){
@@ -22,6 +22,7 @@ http.createServer((req, res)=>{
             });
 
         } else if(req.url === '/users'){
+            console.log(JSON.stringify(users));
             return res.end(JSON.stringify(users));
         }
     

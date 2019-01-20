@@ -1,4 +1,4 @@
-const fs = require('fs');
+const fs = require2('fs');
 
 console.log('시작');
 
